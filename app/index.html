@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vice Lights Studio — GTA-style cover art maker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <header>
+    <h1>VICE LIGHTS <span>STUDIO</span></h1>
+    <p>Turn your photos into GTA-style cover art. Pick a layout, pick a grade, crop each panel, export a PNG.</p>
+  </header>
+
+  <main>
+    <section id="preview-wrap" aria-label="Cover preview">
+      <canvas id="preview"></canvas>
+      <div id="panel-outline" aria-hidden="true"></div>
+      <p id="drop-hint">Drop a photo here to fill the selected panel</p>
+    </section>
+
+    <aside id="controls">
+      <section class="panel">
+        <h2>1 · Photos</h2>
+        <div class="row">
+          <label class="btn" for="upload">Upload a photo</label>
+          <input type="file" id="upload" accept="image/*" hidden>
+          <button id="fill-samples" type="button">Fill with samples</button>
+        </div>
+        <div class="row">
+          <button type="button" data-sample="beach">Beach sample</button>
+          <button type="button" data-sample="city">City sample</button>
+        </div>
+        <p class="note">Photos are read on your machine only — nothing is uploaded.</p>
+      </section>
+
+      <section class="panel">
+        <h2>2 · Layout</h2>
+        <div class="row" id="layout-row">
+          <button type="button" data-layout="split">Sunset Split</button>
+          <button type="button" data-layout="strip">Neon Strip</button>
+          <button type="button" data-layout="mosaic">Vice Mosaic</button>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>3 · Colour grade</h2>
+        <div class="row" id="grade-row">
+          <button type="button" data-grade="sunset">Sunset</button>
+          <button type="button" data-grade="neon">Neon Nights</button>
+          <button type="button" data-grade="golden">Golden Hour</button>
+          <button type="button" data-grade="noir">Vice Noir</button>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>4 · Words</h2>
+        <label>Title <input id="title" type="text" value="MIDNIGHT HEIST" maxlength="24"></label>
+        <label>Subtitle <input id="subtitle" type="text" value="Leonida  •  2026" maxlength="40"></label>
+        <label>Callout 1 <input id="callout1" type="text" value="PALMS AT DUSK" maxlength="24"></label>
+        <label>Callout 2 <input id="callout2" type="text" value="NEON BOULEVARD" maxlength="24"></label>
+      </section>
+
+      <section class="panel">
+        <h2>5 · Crop selected panel</h2>
+        <p id="panel-label" class="note">Panel 1 of 3</p>
+        <p class="note">Click a panel to select it, then drag inside it to pan the photo.</p>
+        <label>Zoom <span id="zoom-val">100%</span>
+          <input id="zoom" type="range" min="1" max="2.5" step="0.05" value="1">
+        </label>
+        <label>Shift left / right
+          <input id="ox" type="range" min="-0.5" max="0.5" step="0.01" value="0">
+        </label>
+        <label>Shift up / down
+          <input id="oy" type="range" min="-0.5" max="0.5" step="0.01" value="0">
+        </label>
+        <label class="check"><input id="flip" type="checkbox"> Flip photo horizontally</label>
+      </section>
+
+      <section class="panel">
+        <h2>6 · Export PNG</h2>
+        <div class="row export-row">
+          <button type="button" data-export="0">Square 1080 × 1080</button>
+          <button type="button" data-export="1">Portrait 1080 × 1350</button>
+          <button type="button" data-export="2">Landscape 1920 × 1080</button>
+        </div>
+        <p id="export-status" class="note" aria-live="polite"></p>
+      </section>
+    </aside>
+  </main>
+
+  <footer>
+    <p>Vice Lights Studio — an original poster maker. No Rockstar logos, artwork or fonts. Your photos never leave your machine.</p>
+  </footer>
+</div>
+<script type="module" src="src/main.js"></script>
+<script type="module" src="src/shots.js"></script>
+</body>
+</html>
